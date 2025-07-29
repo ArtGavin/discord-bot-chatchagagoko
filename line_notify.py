@@ -1,32 +1,33 @@
 import requests
 import os
-from dotenv import load_dotenv
 
-load_dotenv()  # ✅ โหลดค่าจาก .env
+LINE_ACCESS_TOKEN = os.getenv("LINE_CHANNEL_TOKEN")  # ✅ ใช้ชื่อเดียวกับใน Render
 
-LINE_ACCESS_TOKEN = os.getenv("LINE_CHANNEL_TOKEN")
+def notify_line(message: str):
+    token = os.getenv("LINE_CHANNEL_TOKEN")
+    user_id = os.getenv("LINE_USER_ID")
 
-def notify_line(user_id, message: str):
-    if not LINE_ACCESS_TOKEN:
-        print("❌ ไม่พบ LINE_CHANNEL_TOKEN")
+    if not token or not user_id:
+        print("❌ ไม่พบ LINE_CHANNEL_TOKEN หรือ LINE_USER_ID")
         return
-
-    print("📨 กำลังส่ง LINE...")
-    print("➡ user_id:", user_id)
-    print("➡ message:", message)
 
     url = 'https://api.line.me/v2/bot/message/push'
     headers = {
-        'Authorization': f'Bearer {LINE_ACCESS_TOKEN}',
+        'Authorization': f'Bearer {token}',
         'Content-Type': 'application/json'
     }
     data = {
         "to": user_id,
-        "messages": [{"type": "text", "text": message}]
+        "messages": [
+            {
+                "type": "text",
+                "text": message
+            }
+        ]
     }
-
     try:
         res = requests.post(url, headers=headers, json=data)
-        print(f"✅ แจ้งเตือน LINE แล้ว: {res.status_code} {res.text}")
+        print(f"✅ แจ้งเตือนไปยัง LINE แล้ว ({res.status_code})")
     except Exception as e:
-        print("❌ แจ้งเตือนไม่สำเร็จ:", str(e))
+        print("⛔ แจ้งเตือน LINE ล้มเหลว:", str(e))
+
