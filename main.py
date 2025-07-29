@@ -104,7 +104,6 @@ async def on_member_update(before, after):
             view.add_item(discord.ui.Button(style=discord.ButtonStyle.link, label="📚 ดูข้อมูลเพิ่มเติมในสังกัด", url="https://line.me/ti/g2/C6M5Q-dGYavU6l8zAWQny2zzj4suT0FjdJ6JkA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default"))
 
             await after.send(embed=embed, view=view)
-            print(f"📩 ส่งข้อความ DM ไปยัง {after.name} เรียบร้อย")
 
             # ✅ ส่งข้อความแจ้งเตือนผ่าน LINE แบบจัดข้อความสวยงาม
             joined_at_str = after.joined_at.strftime('%d/%m/%Y %H:%M') if after.joined_at else "ไม่ทราบ"
