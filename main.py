@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import os
 import requests
+from datetime import datetime  # ✅ เพิ่มเพื่อใช้ datetime.now()
 from web_server import keep_alive
 
 # ✅ ฟังก์ชันส่งแจ้งเตือนผ่าน LINE Messaging API
@@ -32,6 +33,7 @@ def notify_line(message: str):
         print(f"✅ แจ้งเตือนไปยัง LINE แล้ว ({res.status_code})")
     except Exception as e:
         print("⛔ แจ้งเตือน LINE ล้มเหลว:", str(e))
+
 
 # ✅ โหลดตัวแปรจาก .env
 TOKEN = os.getenv("TOKEN")
