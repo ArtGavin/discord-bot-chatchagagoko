@@ -5,18 +5,33 @@ import requests
 from web_server import keep_alive
 
 # ✅ ฟังก์ชันส่งแจ้งเตือนผ่าน LINE Notify
-def notify_line(message):
-    token = os.getenv("LINE_NOTIFY_TOKEN")
-    if not token:
-        print("❌ ไม่พบ LINE_NOTIFY_TOKEN")
+def notify_line(message: str):
+    token = os.getenv("LINE_CHANNEL_TOKEN")
+    user_id = os.getenv("LINE_USER_ID")
+
+    if not token or not user_id:
+        print("❌ ไม่พบ LINE_CHANNEL_TOKEN หรือ LINE_USER_ID")
         return
-    url = "https://notify-api.line.me/api/notify"
-    headers = {"Authorization": f"Bearer {token}"}
-    data = {"message": message}
+
+    url = 'https://api.line.me/v2/bot/message/push'
+    headers = {
+        'Authorization': f'Bearer {token}',
+        'Content-Type': 'application/json'
+    }
+    data = {
+        "to": user_id,
+        "messages": [
+            {
+                "type": "text",
+                "text": message
+            }
+        ]
+    }
     try:
-        requests.post(url, headers=headers, data=data)
+        res = requests.post(url, headers=headers, json=data)
+        print(f"✅ แจ้งเตือนไปยัง LINE แล้ว ({res.status_code})")
     except Exception as e:
-        print("⛔ แจ้งเตือน LINE ล้มเหลว:", e)
+        print("⛔ แจ้งเตือน LINE ล้มเหลว:", str(e))
 
 # ✅ โหลดตัวแปรจาก .env
 TOKEN = os.getenv("TOKEN")
