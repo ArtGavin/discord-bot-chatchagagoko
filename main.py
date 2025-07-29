@@ -58,11 +58,14 @@ async def on_ready():
 
 @bot.event
 async def on_member_update(before, after):
+    if before.roles == after.roles:
+        return  # ✅ ข้ามถ้า role ไม่ได้เปลี่ยนจริง
+
     before_roles = set(r.id for r in before.roles)
     after_roles = set(r.id for r in after.roles)
 
     new_roles = after_roles - before_roles
-    if ROLE_ID in new_roles:
+    if ROLE_ID in new_roles and ROLE_ID not in before_roles:
         try:
             embed = discord.Embed(
                 title="🎉 ยินดีต้อนรับเข้าสู่สังกัด ชัชกากาโก",
