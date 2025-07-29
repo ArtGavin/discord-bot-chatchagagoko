@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import os
-from keep_alive import keep_alive
+from web_server import keep_alive
 
 # ✅ โหลดตัวแปรจาก .env
 TOKEN = os.getenv("TOKEN")
