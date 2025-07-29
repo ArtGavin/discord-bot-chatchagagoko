@@ -68,6 +68,14 @@ async def on_member_update(before, after):
     new_roles = after_roles - before_roles
     if ROLE_ID in new_roles:
         try:
+@bot.event
+async def on_member_update(before, after):
+    before_roles = set(r.id for r in before.roles)
+    after_roles = set(r.id for r in after.roles)
+
+    # ✅ ส่ง DM และแจ้งเตือน LINE เมื่อเพิ่งได้รับ ROLE_ID เท่านั้น
+    if ROLE_ID not in before_roles and ROLE_ID in after_roles:
+        try:
             embed = discord.Embed(
                 title="🎉 ยินดีต้อนรับเข้าสู่สังกัด ชัชกากาโก",
                 description=(
@@ -113,7 +121,7 @@ async def on_member_update(before, after):
             await after.send(embed=embed, view=view)
             print(f"📩 ส่งข้อความ DM ไปยัง {after.name} เรียบร้อย")
 
-            # ✅ แจ้งเตือนผ่าน LINE Notify
+            # ✅ แจ้งเตือนผ่าน LINE Messaging API
             notify_line(f"📩 ส่งข้อความ DM ไปยัง {after.name} เรียบร้อยแล้ว")
 
         except discord.Forbidden:
