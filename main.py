@@ -117,14 +117,14 @@ async def on_member_update(before, after):
 
             await after.send(embed=embed, view=view)
 
-            joined_at_str = after.joined_at.strftime('%d/%m/%Y %H:%M') if after.joined_at else "ไม่ทราบ"
+            granted_time = datetime.now().strftime('%d/%m/%Y %H:%M')
             line_message = (
                 "📥 *แจ้งเตือนการเข้าร่วมสังกัดใหม่!*\n\n"
                 f"👤 ผู้ใช้: {after.name}\n"
                 f"🆔 Discord ID: {after.id}\n"
-                f"🏅 ยศที่ได้รับ: VIP Member\n"
+                f"🏅 ยศที่ได้รับ: สมาชิกกากาโก\n"
                 f"📦 ส่งข้อความ DM เรียบร้อย ✅\n\n"
-                f"📌 เวลาเข้าดิส: {joined_at_str}"
+                f"📌 เวลาได้รับยศ: {granted_time}"
             )
             notify_line(line_message)
 
