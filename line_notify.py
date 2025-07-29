@@ -1,21 +1,29 @@
 import requests
 import os
 
-LINE_ACCESS_TOKEN = os.getenv("LINE_NOTIFY_TOKEN")
+LINE_ACCESS_TOKEN = os.getenv("LINE_CHANNEL_TOKEN")  # ✅ ใช้ชื่อเดียวกับใน Render
 
-def notify_line(message: str):
+def notify_line(user_id, message: str):
     if not LINE_ACCESS_TOKEN:
-        print("❌ ไม่พบ LINE_NOTIFY_TOKEN ใน environment variables")
+        print("❌ ไม่พบ LINE_CHANNEL_TOKEN ใน environment variables")
         return
 
-    url = 'https://notify-api.line.me/api/notify'
+    url = 'https://api.line.me/v2/bot/message/push'
     headers = {
         'Authorization': f'Bearer {LINE_ACCESS_TOKEN}',
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json'
     }
-    data = {'message': message}
+    data = {
+        "to": user_id,
+        "messages": [
+            {
+                "type": "text",
+                "text": message
+            }
+        ]
+    }
     try:
-        res = requests.post(url, headers=headers, data=data)
-        print(f"✅ แจ้งเตือน LINE แล้ว ({res.status_code})")
+        res = requests.post(url, headers=headers, json=data)
+        print(f"✅ แจ้งเตือนไปยัง LINE แล้ว ({res.status_code})")
     except Exception as e:
         print("❌ แจ้งเตือนไม่สำเร็จ:", str(e))
