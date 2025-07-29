@@ -1,7 +1,22 @@
 import discord
 from discord.ext import commands
 import os
+import requests
 from web_server import keep_alive
+
+# ✅ ฟังก์ชันส่งแจ้งเตือนผ่าน LINE Notify
+def notify_line(message):
+    token = os.getenv("LINE_NOTIFY_TOKEN")
+    if not token:
+        print("❌ ไม่พบ LINE_NOTIFY_TOKEN")
+        return
+    url = "https://notify-api.line.me/api/notify"
+    headers = {"Authorization": f"Bearer {token}"}
+    data = {"message": message}
+    try:
+        requests.post(url, headers=headers, data=data)
+    except Exception as e:
+        print("⛔ แจ้งเตือน LINE ล้มเหลว:", e)
 
 # ✅ โหลดตัวแปรจาก .env
 TOKEN = os.getenv("TOKEN")
@@ -29,8 +44,6 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 @bot.event
 async def on_ready():
     print(f"✅ บอท {bot.user} พร้อมใช้งานแล้ว!")
-
-# ... (เหมือนเดิมด้านบน)
 
 @bot.event
 async def on_member_update(before, after):
@@ -64,34 +77,29 @@ async def on_member_update(before, after):
                 color=discord.Color.teal()
             )
 
-            # ✅ รูปโปรแกรมหลัก (จะแสดงใต้ Embed)
-            embed.set_image(url="https://media.discordapp.net/attachments/123456789012345678/139999999999999999/main-program-preview.png")
-
-
-            # หัว Embed
             embed.set_author(
                 name="สังกัดชัชกากาโก",
                 icon_url="https://media.discordapp.net/attachments/792173112376426516/1391401833934753802/tiktok-logo-tikok-icon-transparent-tikok-app-logo-free-png.png"
             )
 
-            # ✅ ภาพหลักด้านล่าง (ขนาดใหญ่)
             embed.set_image(
                 url="https://media.discordapp.net/attachments/792173112376426516/1399430468650270913/image.png"
             )
 
-            # ✅ Footer
             embed.set_footer(
                 text="สังกัดชัชกากาโก • 📌หมายเหตุ:หากมีปัญหาในการใช้งาน โปรดติดต่อได้ตลอดเวลา!",
                 icon_url="https://media.discordapp.net/attachments/1286230378507669514/1391041551081144423/image-removebg-preview_-_2025-06-14T113430.201.png"
             )
 
-            # ✅ ปุ่มสวยงาม
             view = discord.ui.View()
             view.add_item(discord.ui.Button(style=discord.ButtonStyle.link, label="📘 วิธีใช้งานโปรแกรม", url="https://www.youtube.com/watch?v=8EofTTfj1wg"))
             view.add_item(discord.ui.Button(style=discord.ButtonStyle.link, label="📚 ดูข้อมูลเพิ่มเติมในสังกัด", url="https://line.me/ti/g2/C6M5Q-dGYavU6l8zAWQny2zzj4suT0FjdJ6JkA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default"))
 
             await after.send(embed=embed, view=view)
             print(f"📩 ส่งข้อความ DM ไปยัง {after.name} เรียบร้อย")
+
+            # ✅ แจ้งเตือนผ่าน LINE Notify
+            notify_line(f"📩 ส่งข้อความ DM ไปยัง {after.name} เรียบร้อยแล้ว")
 
         except discord.Forbidden:
             print(f"⛔ ไม่สามารถส่ง DM ไปยัง {after.name} ได้ (อาจปิดรับ DM)")
