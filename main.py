@@ -4,6 +4,7 @@ import os
 import requests
 from datetime import datetime  # ✅ เพิ่มเพื่อใช้ datetime.now()
 from web_server import keep_alive
+from zoneinfo import ZoneInfo
 
 # ✅ ฟังก์ชันส่งแจ้งเตือนผ่าน LINE Messaging API
 def notify_line(message: str):
@@ -119,7 +120,7 @@ async def on_member_update(before, after):
 
             await after.send(embed=embed, view=view)
 
-            granted_time = datetime.now().strftime('%d/%m/%Y %H:%M')
+            granted_time = datetime.now(ZoneInfo("Asia/Bangkok")).strftime('%d/%m/%Y %H:%M')
             line_message = (
                 "📥 *แจ้งเตือนการเข้าร่วมสังกัดใหม่!*\n\n"
                 f"👤 ผู้ใช้: {after.name}\n"
