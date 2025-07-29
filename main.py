@@ -39,7 +39,6 @@ ROLE_ID_ENV = os.getenv("ROLE_ID")
 
 if not TOKEN:
     raise ValueError("❌ ไม่พบ TOKEN ใน .env")
-
 if not ROLE_ID_ENV:
     raise ValueError("❌ ไม่พบ ROLE_ID ใน .env")
 
@@ -52,6 +51,9 @@ intents = discord.Intents.default()
 intents.members = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
+# ✅ ป้องกันการส่งซ้ำ
+already_processed = set()
+
 @bot.event
 async def on_ready():
     print(f"✅ บอท {bot.user} พร้อมใช้งานแล้ว!")
@@ -59,13 +61,20 @@ async def on_ready():
 @bot.event
 async def on_member_update(before, after):
     if before.roles == after.roles:
-        return  # ✅ ข้ามถ้า role ไม่ได้เปลี่ยนจริง
+        return
 
     before_roles = set(r.id for r in before.roles)
     after_roles = set(r.id for r in after.roles)
 
     new_roles = after_roles - before_roles
     if ROLE_ID in new_roles and ROLE_ID not in before_roles:
+
+        if after.id in already_processed:
+            print(f"⚠️ ข้าม {after.name} เพราะเคยแจ้งแล้ว")
+            return
+
+        already_processed.add(after.id)
+
         try:
             embed = discord.Embed(
                 title="🎉 ยินดีต้อนรับเข้าสู่สังกัด ชัชกากาโก",
@@ -108,7 +117,6 @@ async def on_member_update(before, after):
 
             await after.send(embed=embed, view=view)
 
-            # ✅ ส่งข้อความแจ้งเตือนผ่าน LINE แบบจัดข้อความสวยงาม
             joined_at_str = after.joined_at.strftime('%d/%m/%Y %H:%M') if after.joined_at else "ไม่ทราบ"
             line_message = (
                 "📥 *แจ้งเตือนการเข้าร่วมสังกัดใหม่!*\n\n"
@@ -123,6 +131,6 @@ async def on_member_update(before, after):
         except discord.Forbidden:
             print(f"⛔ ไม่สามารถส่ง DM ไปยัง {after.name} ได้ (อาจปิดรับ DM)")
 
-# ✅ ป้องกัน Replit หลับ (หากใช้)
+# ✅ ป้องกัน Replit หรือ Render หลับ
 keep_alive()
 bot.run(TOKEN)
