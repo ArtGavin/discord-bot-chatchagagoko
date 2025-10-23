@@ -95,7 +95,7 @@ async def on_member_update(before, after):
                     "🎬 [คลิกเพื่อดูวิดีโอ](https://youtu.be/CVtXY-5Wk4Q)\n\n"
                     "**🎁 รูปของขวัญ**\n"
                     "🧧 สำหรับผู้ที่ติดตั้งเสร็จแล้ว:\n"
-                    "🎁 [รับรูปของขวัญที่นี่](https://drive.google.com/file/d/1lNtyyflKvQ45ik03aeh027SqCVcSKfXX/view)"
+                    "🎁 [รับรูปของขวัญที่นี่](https://drive.google.com/file/d/1p1Q4F5-XFFT5xKPDdFsQEuKOdBbPcnhg/view?usp=sharing)"
                 ),
                 color=discord.Color.teal()
             )
@@ -123,10 +123,13 @@ async def on_member_update(before, after):
             granted_time = datetime.now(ZoneInfo("Asia/Bangkok")).strftime('%d/%m/%Y %H:%M')
             line_message = (
                 "📥 *แจ้งเตือนการเข้าร่วมสังกัดใหม่!*\n\n"
+                
                 f"👤 ผู้ใช้: {after.name}\n"
                 f"🆔 Discord ID: {after.id}\n"
+                
                 f"🏅 ยศที่ได้รับ: สมาชิกกากาโก\n"
                 f"📦 ส่งข้อความ DM เรียบร้อย ✅\n\n"
+                
                 f"📌 เวลาได้รับยศ: {granted_time}"
             )
             notify_line(line_message)
@@ -137,4 +140,5 @@ async def on_member_update(before, after):
 # ✅ ป้องกัน Replit หรือ Render หลับ
 keep_alive()
 bot.run(TOKEN)
+
 
