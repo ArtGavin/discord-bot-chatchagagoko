@@ -106,7 +106,7 @@ async def on_member_update(before, after):
             )
 
             embed.set_image(
-                url="https://media.discordapp.net/attachments/792173112376426516/1399430468650270913/image.png"
+                url="https://media.discordapp.net/attachments/792173112376426516/1430822820937601065/3c7f3492965159fa.png?ex=68fb2d17&is=68f9db97&hm=60fd12906bd06316fdbdbafc6187165cb820f9f7d630b9f1043d56be31ed9f6d&=&format=webp&quality=lossless"
             )
 
             embed.set_footer(
@@ -140,5 +140,6 @@ async def on_member_update(before, after):
 # ✅ ป้องกัน Replit หรือ Render หลับ
 keep_alive()
 bot.run(TOKEN)
+
 
 
