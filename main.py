@@ -90,7 +90,7 @@ async def on_member_update(before, after):
                     "🎬 [คลิกเพื่อดูวิดีโอ](https://www.youtube.com/watch?v=8EofTTfj1wg)\n\n"
                     "**⏱️ โปรแกรมนับวิน**\n"
                     "📥 **ติดตั้งโปรแกรม:**\n"
-                    "👉 [คลิกเพื่อติดตั้ง](https://drive.google.com/file/d/1QLXyTGzIpa1uvy2Su8RC1k8RO6pyfv9l/view?usp=sharing)\n"
+                    "👉 [คลิกเพื่อติดตั้ง](https://drive.google.com/file/d/149tx3qtxHTACtfttFXjLVV0m8mWz506Z/view?usp=sharing)\n"
                     "📺 **วิธีติดตั้งและใช้งาน:**\n"
                     "🎬 [คลิกเพื่อดูวิดีโอ](https://youtu.be/CVtXY-5Wk4Q)\n\n"
                     "**🎁 รูปของขวัญ**\n"
@@ -140,6 +140,7 @@ async def on_member_update(before, after):
 # ✅ ป้องกัน Replit หรือ Render หลับ
 keep_alive()
 bot.run(TOKEN)
+
 
 
 
