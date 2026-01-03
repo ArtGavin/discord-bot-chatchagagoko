@@ -93,9 +93,9 @@ async def on_member_update(before, after):
                     "👉 [คลิกเพื่อติดตั้ง](https://drive.google.com/file/d/1k3KcWUZoxRaGdit7Rf57-1nLe7XRVrcj/view?usp=sharing)\n"
                     "📺 **วิธีติดตั้งและใช้งาน:**\n"
                     "🎬 [คลิกเพื่อดูวิดีโอ](https://youtu.be/CVtXY-5Wk4Q)\n\n"
-                    "**🎁 รูปของขวัญ**\n"
-                    "🧧 สำหรับผู้ที่ติดตั้งเสร็จแล้ว:\n"
-                    "🎁 [รับรูปของขวัญที่นี่](https://drive.google.com/file/d/1p1Q4F5-XFFT5xKPDdFsQEuKOdBbPcnhg/view?usp=sharing)"
+                    "**🎁 โปรแกรมของขวัญ**\n"
+                    "📥 **ติดตั้งโปรแกรม:**\n"
+                    "🎁 [คลิกเพื่อติดตั้ง](https://drive.google.com/file/d/17IjFOW0X_ldArpYyLLw75mSNUwyCnwjL/view?usp=sharing)"
                 ),
                 color=discord.Color.teal()
             )
@@ -140,6 +140,7 @@ async def on_member_update(before, after):
 # ✅ ป้องกัน Replit หรือ Render หลับ
 keep_alive()
 bot.run(TOKEN)
+
 
 
 
