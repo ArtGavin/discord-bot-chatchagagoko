@@ -80,25 +80,33 @@ async def on_member_update(before, after):
 
         try:
             embed = discord.Embed(
-                title="🎉 ยินดีต้อนรับเข้าสู่สังกัด ชัชกากาโก",
-                description=(
-                    "นี้คือ ไฟล์ โปรแกรม สำหรับ ชาว กากาโก ทุกคน พร้อมคลิปสอน ยินดีต้อนรับทุกคนด้วยครับ ดูคลิปให้ละเอียดนะครับทุกคน ใครไม่ได้ติดตรงไหนทักผมมาส่วนตัวนะครับ:\n\n"
-                    "**🧩 โปรแกรมรวมเซิฟ**\n"
-                    "📥 **ติดตั้งโปรแกรม:**\n"
-                    "👉 [คลิกเพื่อติดตั้ง](https://drive.google.com/file/d/17IjFOW0X_ldArpYyLLw75mSNUwyCnwjL/view?usp=sharing)\n"
-                    "📺 **วิธีติดตั้งและใช้งาน:**\n"
-                    "🎬 [คลิกเพื่อดูวิดีโอ](https://www.youtube.com/watch?v=8EofTTfj1wg)\n\n"
-                    "**⏱️ โปรแกรมนับวิน**\n"
-                    "📥 **ติดตั้งโปรแกรม:**\n"
-                    "👉 [คลิกเพื่อติดตั้ง](https://drive.google.com/file/d/1k3KcWUZoxRaGdit7Rf57-1nLe7XRVrcj/view?usp=sharing)\n"
-                    "📺 **วิธีติดตั้งและใช้งาน:**\n"
-                    "🎬 [คลิกเพื่อดูวิดีโอ](https://youtu.be/CVtXY-5Wk4Q)\n\n"
-                    "**🎁 โปรแกรมของขวัญ**\n"
-                    "📥 **ติดตั้งโปรแกรม:**\n"
-                    "🎁 [คลิกเพื่อติดตั้ง](https://drive.google.com/file/d/1FbjtsWD_FiSnrrfkbPU1wHZHfiiXkFkr/view?usp=sharing)"
-                    "📺 **วิธีติดตั้งและใช้งาน:**\n"
-                    "🎬 [คลิกเพื่อดูวิดีโอ](https://youtu.be/dH4Klh_vODA)\n\n"
-                ),
+                title = "🎉 ยินดีต้อนรับเข้าสู่สังกัด ชัชกากาโก"
+                description = (
+                    "ยินดีต้อนรับทุกคนเข้าสู่สังกัด **ชัชกากาโก** 🎊\n"
+                    "ไฟล์โปรแกรมและคลิปสอนใช้งานทั้งหมดอยู่ด้านล่างนี้\n"
+                    "📌 กรุณาดูคลิปให้ละเอียด หากติดปัญหาจุดไหนสามารถทักผมมาส่วนตัวได้เลยครับ\n\n"
+                
+                    "━━━━━━━━━━━━━━━━━━━\n"
+                    "🧩 **โปรแกรมรวมเซิฟ**\n\n"
+                    "📥 **ดาวน์โหลดโปรแกรม**\n"
+                    "👉 https://drive.google.com/file/d/17IjFOW0X_ldArpYyLLw75mSNUwyCnwjL/view?usp=sharing\n\n"
+                    "📺 **วิธีติดตั้งและใช้งาน**\n"
+                    "🎬 https://www.youtube.com/watch?v=8EofTTfj1wg\n\n"
+                
+                    "━━━━━━━━━━━━━━━━━━━\n"
+                    "⏱️ **โปรแกรมนับวิน**\n\n"
+                    "📥 **ดาวน์โหลดโปรแกรม**\n"
+                    "👉 https://drive.google.com/file/d/1k3KcWUZoxRaGdit7Rf57-1nLe7XRVrcj/view?usp=sharing\n\n"
+                    "📺 **วิธีติดตั้งและใช้งาน**\n"
+                    "🎬 https://youtu.be/CVtXY-5Wk4Q\n\n"
+                
+                    "━━━━━━━━━━━━━━━━━━━\n"
+                    "🎁 **โปรแกรมของขวัญ**\n\n"
+                    "📥 **ดาวน์โหลดโปรแกรม**\n"
+                    "👉 https://drive.google.com/file/d/1FbjtsWD_FiSnrrfkbPU1wHZHfiiXkFkr/view?usp=sharing\n\n"
+                    "📺 **วิธีติดตั้งและใช้งาน**\n"
+                    "🎬 https://youtu.be/dH4Klh_vODA\n"
+                )
                 color=discord.Color.teal()
             )
 
@@ -142,6 +150,7 @@ async def on_member_update(before, after):
 # ✅ ป้องกัน Replit หรือ Render หลับ
 keep_alive()
 bot.run(TOKEN)
+
 
 
 
