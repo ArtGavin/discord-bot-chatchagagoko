@@ -97,7 +97,7 @@ async def on_member_update(before, after):
                     "📥 **ติดตั้งโปรแกรม:**\n"
                     "🎁 [คลิกเพื่อติดตั้ง](https://drive.google.com/file/d/1FbjtsWD_FiSnrrfkbPU1wHZHfiiXkFkr/view?usp=sharing)"
                     "📺 **วิธีติดตั้งและใช้งาน:**\n"
-                    "🎬 [คลิกเพื่อดูวิดีโอ](https://youtu.be/dH4Klh_vODA"
+                    "🎬 [คลิกเพื่อดูวิดีโอ](https://youtu.be/dH4Klh_vODA)\n\n"
                 ),
                 color=discord.Color.teal()
             )
@@ -142,6 +142,7 @@ async def on_member_update(before, after):
 # ✅ ป้องกัน Replit หรือ Render หลับ
 keep_alive()
 bot.run(TOKEN)
+
 
 
 
