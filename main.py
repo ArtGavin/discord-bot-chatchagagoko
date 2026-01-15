@@ -130,7 +130,7 @@ def build_welcome_embed(member: discord.Member) -> discord.Embed:
         name="🎁 โปรแกรมของขวัญ",
         value=(
             "📥 ดาวน์โหลด:\n"
-            "https://drive.google.com/file/d/1FbjtsWD_FiSnrrfkbPU1wHZHfiiXkFkr/view?usp=sharing\n\n"
+            "https://drive.google.com/file/d/1HGh9qTQ1ANwPp9TZE-SDC8Olm7c9dckj/view?usp=sharing\n\n"
             "🎬 วิธีติดตั้งและใช้งาน:\n"
             "https://youtu.be/dH4Klh_vODA"
         ),
@@ -234,3 +234,4 @@ async def on_member_update(before: discord.Member, after: discord.Member):
 # =========================
 keep_alive()
 bot.run(TOKEN)
+
