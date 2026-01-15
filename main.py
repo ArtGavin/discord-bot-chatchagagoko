@@ -137,7 +137,7 @@ def build_vertical_embed() -> discord.Embed:
 
         "🎁 **โปรแกรมของขวัญ**\n"
         "📥 **ติดตั้งโปรแกรม:**\n"
-        "👉 [คลิกเพื่อติดตั้ง](https://drive.google.com/file/d/14AlPqx7bwUr6oYK2l-EbS7kB9OvrpoLJ/view?usp=sharing)\n"
+        "👉 [คลิกเพื่อติดตั้ง](https://drive.google.com/file/d/10cwC3tCwp2nMoH9dBNnS49S-kdX2kNC6/view?usp=sharing)\n"
         "📺 **วิธีติดตั้งและใช้งาน:**\n"
         "🎬 [คลิกเพื่อดูวิดีโอ](https://youtu.be/dH4Klh_vODA)\n"
     )
@@ -243,4 +243,5 @@ else:
     print("ℹ️ ไม่พบ web_server.keep_alive (ข้าม)")
 
 bot.run(TOKEN)
+
 
