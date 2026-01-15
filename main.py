@@ -1,11 +1,9 @@
-# main.py (FULL FIXED)
+# main.py (FULL FIXED — Vertical layout like screenshot)
 # ✅ Render-ready
-# ✅ FIX Embed syntax
-# ✅ Buttons download style (เหมือนเดิม)
-# ✅ Split buttons into 2 messages (Discord max 5 buttons per view)
-# ✅ Persistent anti-duplicate
+# ✅ Embed vertical list style (markdown links)
+# ✅ Persistent anti-duplicate (processed_users.json)
 # ✅ LINE notify
-# ✅ Optional keep_alive
+# ✅ Optional keep_alive (web_server.py)
 
 import os
 import json
@@ -117,14 +115,36 @@ async def on_ready():
     print("🟢 Listening for member role updates...")
 
 
-def build_welcome_embed() -> discord.Embed:
+def build_vertical_embed() -> discord.Embed:
+    # ✅ ลิงก์แบบ Markdown ใน embed (แนวตั้งเหมือนรูป)
+    desc = (
+        "🎉 **ยินดีต้อนรับเข้าสู่สังกัด ชัชกากาโก**\n"
+        "นี่คือ ไฟล์ โปรแกรม สำหรับ ชาว กากาโก ทุกคน พร้อมคลิปสอน\n"
+        "ยินดีต้อนรับทุกคนด้วยครับ ดูคลิปให้ละเอียดนะครับทุกคน\n"
+        "ใครไม่ได้ติดตรงไหนทักผมมาส่วนตัวนะครับ!\n\n"
+
+        "🧩 **โปรแกรมรวมเซิฟ**\n"
+        "📥 **ติดตั้งโปรแกรม:**\n"
+        "👉 [คลิกเพื่อติดตั้ง](https://drive.google.com/file/d/17IjFOW0X_ldArpYyLLw75mSNUwyCnwjL/view?usp=sharing)\n"
+        "📺 **วิธีติดตั้งและใช้งาน:**\n"
+        "🎬 [คลิกเพื่อดูวิดีโอ](https://www.youtube.com/watch?v=8EofTTfj1wg)\n\n"
+
+        "⏱️ **โปรแกรมนับวิน**\n"
+        "📥 **ติดตั้งโปรแกรม:**\n"
+        "👉 [คลิกเพื่อติดตั้ง](https://drive.google.com/file/d/1k3KcWUZoxRaGdit7Rf57-1nLe7XRVrcj/view?usp=sharing)\n"
+        "📺 **วิธีติดตั้งและใช้งาน:**\n"
+        "🎬 [คลิกเพื่อดูวิดีโอ](https://youtu.be/CVtXY-5Wk4Q)\n\n"
+
+        "🎁 **โปรแกรมของขวัญ**\n"
+        "📥 **ติดตั้งโปรแกรม:**\n"
+        "👉 [คลิกเพื่อติดตั้ง](https://drive.google.com/file/d/1HGh9qTQ1ANwPp9TZE-SDC8Olm7c9dckj/view?usp=sharing)\n"
+        "📺 **วิธีติดตั้งและใช้งาน:**\n"
+        "🎬 [คลิกเพื่อดูวิดีโอ](https://youtu.be/dH4Klh_vODA)\n"
+    )
+
     embed = discord.Embed(
-        title="🎉 ยินดีต้อนรับเข้าสู่สังกัด ชัชกากาโก",
-        description=(
-            "ยินดีต้อนรับทุกคนเข้าสู่สังกัด **ชัชกากาโก** 🎊\n"
-            "ดาวน์โหลดโปรแกรมและดูคลิปสอนได้จากปุ่มด้านล่างเลยครับ\n"
-            "📌 ดูคลิปให้ละเอียด หากติดปัญหาทักผมมาส่วนตัวได้เลยครับ"
-        ),
+        title="สังกัดชัชกากาโก",
+        description=desc,
         color=discord.Color.teal(),
     )
 
@@ -141,49 +161,12 @@ def build_welcome_embed() -> discord.Embed:
         text="สังกัดชัชกากาโก • 📌หมายเหตุ:หากมีปัญหาในการใช้งาน โปรดติดต่อได้ตลอดเวลา!",
         icon_url="https://media.discordapp.net/attachments/1286230378507669514/1391041551081144423/image-removebg-preview_-_2025-06-14T113430.201.png",
     )
-
     return embed
 
 
-def build_download_view() -> discord.ui.View:
-    # ✅ ปุ่มดาวน์โหลด 3 ปุ่ม (ไม่เกิน 5)
+def build_line_group_view() -> discord.ui.View:
+    # ถ้าคุณอยากให้ “มีปุ่มเข้ากลุ่มไลน์” เพิ่ม (ไม่กระทบ layout แนวตั้ง)
     view = discord.ui.View()
-    view.add_item(discord.ui.Button(
-        style=discord.ButtonStyle.link,
-        label="📥 ดาวน์โหลดโปรแกรมรวมเซิฟ",
-        url="https://drive.google.com/file/d/17IjFOW0X_ldArpYyLLw75mSNUwyCnwjL/view?usp=sharing",
-    ))
-    view.add_item(discord.ui.Button(
-        style=discord.ButtonStyle.link,
-        label="📥 ดาวน์โหลดโปรแกรมนับวิน",
-        url="https://drive.google.com/file/d/1k3KcWUZoxRaGdit7Rf57-1nLe7XRVrcj/view?usp=sharing",
-    ))
-    view.add_item(discord.ui.Button(
-        style=discord.ButtonStyle.link,
-        label="📥 ดาวน์โหลดโปรแกรมของขวัญ",
-        url="https://drive.google.com/file/d/1HGh9qTQ1ANwPp9TZE-SDC8Olm7c9dckj/view?usp=sharing",
-    ))
-    return view
-
-
-def build_help_view() -> discord.ui.View:
-    # ✅ ปุ่มคลิป + กลุ่มไลน์ (4 ปุ่ม)
-    view = discord.ui.View()
-    view.add_item(discord.ui.Button(
-        style=discord.ButtonStyle.link,
-        label="📘 คลิปสอน (รวมเซิฟ)",
-        url="https://www.youtube.com/watch?v=8EofTTfj1wg",
-    ))
-    view.add_item(discord.ui.Button(
-        style=discord.ButtonStyle.link,
-        label="📘 คลิปสอน (นับวิน)",
-        url="https://youtu.be/CVtXY-5Wk4Q",
-    ))
-    view.add_item(discord.ui.Button(
-        style=discord.ButtonStyle.link,
-        label="📘 คลิปสอน (ของขวัญ)",
-        url="https://youtu.be/dH4Klh_vODA",
-    ))
     view.add_item(discord.ui.Button(
         style=discord.ButtonStyle.link,
         label="📚 เข้ากลุ่ม LINE สังกัด",
@@ -194,7 +177,6 @@ def build_help_view() -> discord.ui.View:
 
 @bot.event
 async def on_member_update(before: discord.Member, after: discord.Member):
-    # roles ไม่เปลี่ยน ข้าม
     if before.roles == after.roles:
         return
 
@@ -202,29 +184,23 @@ async def on_member_update(before: discord.Member, after: discord.Member):
     after_roles = {r.id for r in after.roles}
     new_roles = after_roles - before_roles
 
-    # ตรวจว่าถูกเพิ่ม role ที่เรากำหนด
     if ROLE_ID not in new_roles:
         return
 
-    # กันส่งซ้ำ
     if after.id in already_processed:
         print(f"⚠️ ข้าม {after} เพราะเคยแจ้งแล้ว")
         return
 
     print(f"🎯 {after} ได้รับ Role ID={ROLE_ID}")
 
-    embed = build_welcome_embed()
-    download_view = build_download_view()
-    help_view = build_help_view()
+    embed = build_vertical_embed()
+    line_view = build_line_group_view()
 
     try:
-        # ✅ ส่ง 2 ข้อความ เพื่อไม่ชนลิมิตปุ่ม
-        await after.send(embed=embed, view=download_view)
-        await after.send("📌 ปุ่มคลิปสอน + เข้ากลุ่ม LINE อยู่ด้านล่างครับ", view=help_view)
-
+        # ✅ ส่ง 1 ข้อความ: เรียงแนวตั้งเหมือนภาพ
+        await after.send(embed=embed, view=line_view)
         print(f"✅ ส่ง DM ให้ {after} สำเร็จ")
 
-        # mark processed เมื่อส่งสำเร็จ
         already_processed.add(after.id)
         save_processed(already_processed)
 
