@@ -100,9 +100,9 @@ async def on_member_update(before, after):
 
                     "🎁 **โปรแกรมของขวัญ**\n\n"
                     "📥 **ดาวน์โหลดโปรแกรม**\n"
-                    "👉 https://drive.google.com/file/d/1FbjtsWD_FiSnrrfkbPU1wHZHfiiXkFkr/view?usp=sharing\n\n"
+                    "👉 https://drive.google.com/file/d/1HGh9qTQ1ANwPp9TZE-SDC8Olm7c9dckj/view?usp=sharing\n\n"
                     "📺 **วิธีติดตั้งและใช้งาน**\n"
-                    "🎬 https://youtu.be/dH4Klh_vODA\n\n"
+                    "🎬 https://youtu.be/dH4Klh_vODA"
                 )
                 color=discord.Color.teal()
             )
@@ -147,4 +147,5 @@ async def on_member_update(before, after):
 # ✅ ป้องกัน Replit หรือ Render หลับ
 keep_alive()
 bot.run(TOKEN)
+
 
